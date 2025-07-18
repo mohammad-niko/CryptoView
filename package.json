@@ -1,0 +1,22 @@
+{
+  "name": "cryptoview",
+  "version": "1.0.0",
+  "description": "A modern and responsive web application that displays real-time cryptocurrency data using the [CoinGecko API](https://www.coingecko.com/en/api). Built with HTML, Sass, and Vanilla JavaScript (ES6), this project offers live prices, historical charts, search and filter functionality, and more.",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass src/scss/style.scss dist/style.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohammad-niko/CryptoView.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mohammad-niko/CryptoView/issues"
+  },
+  "homepage": "https://github.com/mohammad-niko/CryptoView#readme",
+  "dependencies": {
+    "sass": "^1.89.2"
+  }
+}
