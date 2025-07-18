@@ -1,0 +1,109 @@
+// Import mixins and variables
+@use "../abstracts/mixins" as *;
+@use "../abstracts/variables" as *;
+
+main {
+  margin-top: 40px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.parent-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.main-card {
+  flex: 1 1 280px;
+  max-width: 30%;
+  height: 300px;
+  margin-top: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
+  }
+}
+
+.header-container {
+  display: flex;
+  justify-content: flex-start;
+  padding: 5px 0 5px 5px;
+  gap: 5px;
+}
+
+.header-icon {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.trending-coins{
+  gap: 20px;
+  padding: 0 10px;
+}
+.trending-defi {
+  gap: 20px;
+  padding: 0 10px;
+}
+
+
+
+.coin-card-item {
+  margin-top: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.coin-info {
+  gap: 10px;
+  width: 80%;
+display: flex;
+align-items: center;
+
+gap: 20px;
+}
+.coin-info-logo {
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 50% !important;
+}
+.coin-info-index,
+.coin-info-symbol {
+  display: inline-block;
+  font-size: 1.2rem;
+}
+.coin-price {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+@media (max-width: 830px) {
+  .main-card {
+    max-width: 100%;
+    max-height:100% ;
+    margin-top: 20px;
+  }
+}
