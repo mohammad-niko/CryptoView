@@ -1,6 +1,7 @@
 // Import mixins and variables
 @use "../abstracts/mixins" as *;
 @use "../abstracts/variables" as *;
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
 
 main {
   margin-top: 40px;
@@ -56,7 +57,7 @@ main {
   margin-top: 5px;
 }
 
-.trending-coins{
+.trending-coins {
   gap: 20px;
   padding: 0 10px;
 }
@@ -64,8 +65,6 @@ main {
   gap: 20px;
   padding: 0 10px;
 }
-
-
 
 .coin-card-item {
   margin-top: 5px;
@@ -77,10 +76,10 @@ main {
 .coin-info {
   gap: 10px;
   width: 80%;
-display: flex;
-align-items: center;
+  display: flex;
+  align-items: center;
 
-gap: 20px;
+  gap: 20px;
 }
 .coin-info-logo {
   width: 30px !important;
@@ -99,11 +98,65 @@ gap: 20px;
   align-items: center;
 }
 
-
 @media (max-width: 830px) {
   .main-card {
     max-width: 100%;
-    max-height:100% ;
+    max-height: 100%;
     margin-top: 20px;
   }
+}
+
+.all-crypto-container {
+  width: 100%;
+  margin-top: 50px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0px 20px;
+}
+
+.tab {
+  width: 100%;
+  border-bottom: 1px solid gray;
+  height: 40px;
+}
+.tab-title {
+  width: 100px;
+  height: 40px;
+  border-bottom: 3px solid blue;
+  font-family: "Rubik", sans-serif;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.table {
+  border-collapse: collapse;
+  border: 2px solid rgb(140 140 140);
+  font-family: "Rubik", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.td{
+vertical-align: middle;
+}
+
+
+.all-coin-crypto-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.last-seven-days {
+  padding: 0px !important;
+}
+.weekly-chart {
+  width: 100px;
+  height: 100px;
+}
+
+.canvas-weekly{
+  width: 100px;
+  height: 50px;
+  vertical-align: middle;
 }

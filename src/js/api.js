@@ -1,25 +1,13 @@
-import { rendertrending } from "./ui.js";
-import {rnderBtcMarketCap} from "./chart.js"
+import { rendertrending, renderDataRow } from "./ui.js";
+import { rnderBtcMarketCap } from "./chart.js";
 export async function trendingCoinsApi() {
-  const config = {
-    headers: {
-      Accept: "application/json",
-    },
-  };
   try {
     const { data } = await axios(
-      "https://api.coingecko.com/api/v3/search/trending",
-      config
+      "https://api.coingecko.com/api/v3/search/trending"
     );
     // console.log(data.coins);
     const elm = document.querySelector(".trending-coins");
-    data.coins.forEach((data, index) =>
-      rendertrending(data.item, elm, index)
-    );
-    const mmad =document.querySelector(".all-crypto-container");
-       data.coins.forEach((data, index) =>
-      rendertrending(data.item, mmad, index)
-    );
+    data.coins.forEach((data, index) => rendertrending(data.item, elm, index));
   } catch (error) {
     console.log(error);
   }
@@ -27,15 +15,9 @@ export async function trendingCoinsApi() {
 trendingCoinsApi();
 
 export async function trendingDifeApi() {
-  const config = {
-    headers: {
-      Accept: "application/json",
-    },
-  };
   try {
     const { data } = await axios(
-      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&category=decentralized-finance-defi&order=market_cap_desc&per_page=50&page=1&sparkline=false",
-      config
+      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&category=decentralized-finance-defi&order=market_cap_desc&per_page=50&page=1&sparkline=false"
     );
     // console.log(data);
     const elm = document.querySelector(".trending-defi");
@@ -47,17 +29,11 @@ export async function trendingDifeApi() {
 trendingDifeApi();
 
 export async function btcMarketCapApi() {
-  const config = {
-    headers: {
-      Accept: "application/json",
-    },
-  };
   try {
     const { data } = await axios(
-      "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30",
-      config
+      "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30"
     );
-    console.log(data);
+    // console.log(data);
     const labels = data.prices.map((price) => {
       const date = new Date(price[0]);
       return `${date.getMonth() + 1}/${date.getDate()}`;
@@ -71,3 +47,16 @@ export async function btcMarketCapApi() {
   }
 }
 btcMarketCapApi();
+
+export async function allCryptoApi() {
+  try {
+    const { data } = await axios(
+      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true"
+    );
+    console.log(data);
+    data.forEach((data,index)=>renderDataRow(data,index))
+  } catch (error) {
+    console.log(error);
+  }
+}
+allCryptoApi();
