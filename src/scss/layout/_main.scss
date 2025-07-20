@@ -117,7 +117,6 @@ main {
 
 .tab {
   width: 100%;
-  border-bottom: 1px solid gray;
   height: 40px;
 }
 .tab-title {
@@ -131,21 +130,27 @@ main {
 
 .table {
   border-collapse: collapse;
-  border: 2px solid rgb(140 140 140);
+  border: 2px solid white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   font-family: "Rubik", sans-serif;
   font-size: 0.8rem;
   letter-spacing: 1px;
 }
-
-.td{
-vertical-align: middle;
+.data-row {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  &:hover {
+    background-color: rgba(173, 216, 230, 0.15);
+  }
 }
-
+.td {
+  vertical-align: middle;
+}
 
 .all-coin-crypto-img {
   width: 30px;
   height: 30px;
   border-radius: 50%;
+  margin-right: 4px;
 }
 .last-seven-days {
   padding: 0px !important;
@@ -155,8 +160,35 @@ vertical-align: middle;
   height: 100px;
 }
 
-.canvas-weekly{
+.canvas-weekly {
   width: 100px;
   height: 50px;
   vertical-align: middle;
+}
+
+
+@media (max-width:1108px){
+  .all-crypto-container{
+    padding: 0px;
+  }
+  .header-last-seven-days,.last-seven-days,.header-circulating-supply,.circulating-supply{
+    display: none;
+  }
+}
+
+@media (max-width:839px){
+.header-market-cap,.header-volume,.volume,.market-cap{
+    display: none;
+  }
+}
+
+@media (max-width:556px){
+  .header-seven-day,.seven-day-change{
+    display: none;
+  }
+}
+@media (max-width:441px){
+.header-one-hour,.one-hour-change{
+  display: none;
+}
 }

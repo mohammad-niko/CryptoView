@@ -256,7 +256,6 @@ main {
 
 .tab {
   width: 100%;
-  border-bottom: 1px solid gray;
   height: 40px;
 }
 
@@ -271,10 +270,18 @@ main {
 
 .table {
   border-collapse: collapse;
-  border: 2px solid rgb(140, 140, 140);
+  border: 2px solid white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   font-family: "Rubik", sans-serif;
   font-size: 0.8rem;
   letter-spacing: 1px;
+}
+
+.data-row {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.data-row:hover {
+  background-color: rgba(173, 216, 230, 0.15);
 }
 
 .td {
@@ -285,6 +292,7 @@ main {
   width: 30px;
   height: 30px;
   border-radius: 50%;
+  margin-right: 4px;
 }
 
 .last-seven-days {
@@ -300,6 +308,82 @@ main {
   width: 100px;
   height: 50px;
   vertical-align: middle;
+}
+
+@media (max-width: 1108px) {
+  .all-crypto-container {
+    padding: 0px;
+  }
+  .header-last-seven-days, .last-seven-days, .header-circulating-supply, .circulating-supply {
+    display: none;
+  }
+}
+@media (max-width: 839px) {
+  .header-market-cap, .header-volume, .volume, .market-cap {
+    display: none;
+  }
+}
+@media (max-width: 556px) {
+  .header-seven-day, .seven-day-change {
+    display: none;
+  }
+}
+@media (max-width: 441px) {
+  .header-one-hour, .one-hour-change {
+    display: none;
+  }
+}
+footer {
+  width: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0px;
+  gap: 10px;
+}
+footer .social-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 30px;
+}
+footer .social-icons .social-item {
+  color: rgb(181, 183, 187);
+  font-size: 20px;
+  list-style: none;
+}
+footer .social-icons .social-item i {
+  color: rgb(181, 183, 187);
+  transition: color 0.3s linear;
+}
+footer .social-icons .social-item:hover i {
+  color: rgb(56, 97, 251);
+}
+footer .tenx-para {
+  color: #5dade2;
+  text-align: center;
+  max-width: 90%;
+  font-size: 1rem;
+  line-height: 1.6;
+  padding: 0 10px;
+  transition: all 0.5s linear;
+}
+footer .tenx-para:hover {
+  text-shadow: 0 0 40px #5dade2;
+}
+footer .tenx-para .CoinGecko {
+  color: #5dade2;
+}
+footer .tenx-para a {
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -203,11 +203,11 @@ export function renderDataRow(data, index) {
 
   const dataRow = document.createElement("tr");
   dataRow.classList.add("data-row");
-  dataRow.setAttribute("scope","row")
+  dataRow.setAttribute("scope", "row");
   tbody.appendChild(dataRow);
 
   const td0 = document.createElement("td");
-  td0.classList.add("nothing","td");
+  td0.classList.add("nothing", "td");
   dataRow.appendChild(td0);
 
   // like star
@@ -216,7 +216,7 @@ export function renderDataRow(data, index) {
   td0.appendChild(star);
 
   const td1 = document.createElement("td");
-  td1.classList.add("number","td");
+  td1.classList.add("number", "td");
   td1.textContent = index + 1;
   dataRow.appendChild(td1);
 
@@ -237,50 +237,73 @@ export function renderDataRow(data, index) {
   td2.appendChild(nameAndSymbol);
 
   const td3 = document.createElement("td");
-  td3.classList.add("price","td");
+  td3.classList.add("price", "td");
   td3.textContent =
     data.current_price < 1
-      ? data.current_price.toFixed(5)
-      : data.current_price.toFixed(2);
+      ? `$${data.current_price.toFixed(5)}`
+      : `$${data.current_price.toFixed(2)}`;
   dataRow.appendChild(td3);
 
   const td4 = document.createElement("td");
-  td4.classList.add("one-hour-change","td");
+  td4.classList.add("one-hour-change", "td");
   td4.textContent = `${data.ath_change_percentage.toFixed(2)}%`;
+  if (data.ath_change_percentage.toFixed(2) < 0) {
+    td4.style.color = "red";
+  } else {
+    td4.style.color = "green";
+  }
   dataRow.appendChild(td4);
 
   const td5 = document.createElement("td");
-  td5.classList.add("twenty-four-hour-change","td");
+  td5.classList.add("twenty-four-hour-change", "td");
   td5.textContent = `${data.price_change_percentage_24h.toFixed(2)}%`;
+  if (data.price_change_percentage_24h.toFixed(2) < 0) {
+    td5.style.color = "red";
+  } else {
+    td5.style.color = "green";
+  }
   dataRow.appendChild(td5);
 
   const td6 = document.createElement("td");
-  td6.classList.add("seven-day-change","td");
-  td6.textContent = `${data.atl_change_percentage.toFixed(2)}%`;
-  dataRow.appendChild(td6);
+  td6.classList.add("seven-day-change", "td");
+  if (data.price_change_percentage_7d_in_currency) {
+    td6.textContent = `${data.price_change_percentage_7d_in_currency.toFixed(
+      2
+    )}%`;
+    if (data.price_change_percentage_7d_in_currency.toFixed(2) < 0) {
+      td6.style.color = "red";
+    } else {
+      td6.style.color = "green";
+    }
+  } else {
+    td6.textContent = `${0.00}%`;
+    td6.style.color = "green";
+  }
 
+  dataRow.appendChild(td6);
+  console.log(data.atl_change_percentage.toFixed(2));
   const td7 = document.createElement("td");
-  td7.classList.add("market-cap","td");
+  td7.classList.add("market-cap", "td");
   td7.textContent = `$${data.market_cap.toLocaleString()}`;
   dataRow.appendChild(td7);
 
   const td8 = document.createElement("td");
-  td8.classList.add("volume","td");
+  td8.classList.add("volume", "td");
   td8.textContent = `$${data.total_volume.toLocaleString()}`;
   dataRow.appendChild(td8);
 
   const td9 = document.createElement("td");
-  td9.classList.add("circulating-supply","td");
+  td9.classList.add("circulating-supply", "td");
   td9.textContent = data.circulating_supply.toLocaleString();
   dataRow.appendChild(td9);
 
   const td10 = document.createElement("td");
-  td10.classList.add("last-seven-days","td");
+  td10.classList.add("last-seven-days", "td");
   dataRow.appendChild(td10);
 
   const canvas = document.createElement("canvas");
-  canvas.classList.add(`weekly-chart-${index}`,"canvas-weekly");
+  canvas.classList.add(`weekly-chart-${index}`, "canvas-weekly");
   td10.appendChild(canvas);
 
-  renderWeellyChart(data.sparkline_in_7d,index);
+  renderWeellyChart(data.sparkline_in_7d, index);
 }
