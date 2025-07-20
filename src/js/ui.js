@@ -1,12 +1,6 @@
 import { renderWeellyChart } from "./chart.js";
 const main = document.querySelector("main");
 
-export function renderHomeViwe() {
-  rendertrendingPart();
-  renderAllCryptoPart();
-}
-renderHomeViwe();
-
 export function rendertrendingPart() {
   const parentContainer = document.createElement("div");
   parentContainer.classList.add("parent-container");
@@ -276,7 +270,7 @@ export function renderDataRow(data, index) {
       td6.style.color = "green";
     }
   } else {
-    td6.textContent = `${0.00}%`;
+    td6.textContent = `${0.0}%`;
     td6.style.color = "green";
   }
 

@@ -1,4 +1,4 @@
-export function rnderBtcMarketCap(labels, data) {
+export function renderBtcMarketCapChart(labels, data) {
   const ctx = document.querySelector(".main-canvas").getContext("2d");
 
   new Chart(ctx, {
