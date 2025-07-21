@@ -1,9 +1,8 @@
-
 import "./router.js";
-import "./ui.js";
-import "./api.js";
-import "./chart.js";
+import "./ui/homeUi.js";
+import "./api/homeApi.js";
 import "./pages/home.js";
+import "./chart.js";
 import "./pages/about.js";
 import "./pages/coin.js";
 import "./pages/contact.js";

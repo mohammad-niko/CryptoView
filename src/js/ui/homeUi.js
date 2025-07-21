@@ -1,4 +1,4 @@
-import { renderWeellyChart } from "./chart.js";
+import { renderWeellyChart } from "../chart.js";
 const main = document.querySelector("main");
 
 export function rendertrendingPart() {
@@ -192,6 +192,7 @@ export function renderAllCryptoPart() {
   tbody.classList.add("tbody");
   table.appendChild(tbody);
 }
+
 export function renderDataRow(data, index) {
   const tbody = document.querySelector("tbody");
 

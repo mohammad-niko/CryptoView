@@ -1,16 +1,16 @@
-import { navigate, setIsHomeView } from "../router.js";
+import { setIsHomeView } from "../router.js";
 import {
   rendertrendingPart,
   rendertrending,
   renderAllCryptoPart,
   renderDataRow,
-} from "../ui.js";
+} from "../ui/homeUi.js";
 import {
   fetchTrendingCoins,
   fetchTrendingDefiCoins,
   fetchBitcoinMarketChart,
   fetchAllCryptocurrencies,
-} from "../api.js";
+} from "../api/homeApi.js";
 import { renderBtcMarketCapChart } from "../chart.js";
 
 export async function renderHomeView() {
@@ -31,7 +31,6 @@ export async function renderHomeView() {
 
   const btcChartData = await fetchBitcoinMarketChart();
   renderBtcMarketCapChart(btcChartData[0], btcChartData[1]);
-
 
   renderAllCryptoPart();
   const allCoinsData = await fetchAllCryptocurrencies();
