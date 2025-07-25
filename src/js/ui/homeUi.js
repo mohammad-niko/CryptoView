@@ -276,7 +276,6 @@ export function renderDataRow(data, index) {
   }
 
   dataRow.appendChild(td6);
-  console.log(data.atl_change_percentage.toFixed(2));
   const td7 = document.createElement("td");
   td7.classList.add("market-cap", "td");
   td7.textContent = `$${data.market_cap.toLocaleString()}`;

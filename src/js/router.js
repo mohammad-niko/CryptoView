@@ -1,10 +1,9 @@
 // import renderHome from "./pages/home.js";
 // import renderDitaleCoin from "./pages/coin.js";
 // import renderAbout from "./pages/about.js";
-import {renderLogin} from "./pages/login.js";
 // import renderSignup from "./pages/signup.js";
 import { renderHomeView } from "./pages/home.js";
-
+import {renderLoginView} from "./pages/login.js";
 
 document.addEventListener("DOMContentLoaded",router);
 window.addEventListener("hashchange", router);
@@ -14,10 +13,9 @@ export let isHome = true;
 export function setIsHomeView(value) {
   isHome = value;
 }
-// renderHomeView()
+
 const routes = {
-  "#/": renderHomeView,
-  "#/login": renderLogin,
+  " ": renderHomeView,
 };
 // "/coin-id": renderDitaleCoin,
 // "/about": renderAbout,
@@ -45,7 +43,7 @@ function findMatchingRoute(hash) {
       }
     }
   }
-  return renderHomeView();
+  return renderHomeView;
 }
 
 

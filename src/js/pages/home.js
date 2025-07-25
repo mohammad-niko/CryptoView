@@ -14,6 +14,7 @@ import {
 import { renderBtcMarketCapChart } from "../chart.js";
 
 export async function renderHomeView() {
+
   setIsHomeView(true);
   rendertrendingPart();
 
