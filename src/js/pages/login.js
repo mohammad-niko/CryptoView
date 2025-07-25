@@ -1,3 +1,5 @@
+import { renderSignUp } from "./signup.js";
+
 const body = document.querySelector("body");
 
 //event Listener for Login btn in header:
@@ -36,24 +38,43 @@ export function renderLoginView() {
   login.innerText = "Login";
   login.style.color = "black";
   login.style.borderBottom = "3px solid blue";
+  login.style.cursor = "pointer";
   logOrSin.appendChild(login);
+  login.addEventListener("click", () => {
+    renderLogin();
+  });
 
   const singup = document.createElement("div");
-  singup.classList.add("sinup-in-titale");
   singup.innerText = "Signup";
+  singup.classList.add("sinup-in-titale");
+  singup.style.cursor = "pointer";
   logOrSin.appendChild(singup);
+
+  singup.addEventListener("click", () => {
+    renderSignUp();
+  });
 
   const containerOfInputs = document.createElement("div");
   containerOfInputs.classList.add("container-of-inputs");
   container.appendChild(containerOfInputs);
   renderLogin();
 }
+
 export function renderLogin() {
   const containerOfInputs = document.querySelector(".container-of-inputs");
   containerOfInputs.innerHTML = "";
 
+  const logInTitle = document.querySelector(".login-in-titale");
+  logInTitle.style.color = "black";
+  logInTitle.style.borderBottom = "3px solid blue";
+
+  const singUpTitle = document.querySelector(".sinup-in-titale");
+  singUpTitle.style.color = "gray";
+  singUpTitle.style.borderBottom = "3px solid white";
+
   const form = document.createElement("form");
   form.classList.add("login-form");
+  form.id = "login-form";
 
   // -------- Email Section --------
   const emailDiv = document.createElement("div");
@@ -65,7 +86,7 @@ export function renderLogin() {
 
   const emailInput = document.createElement("input");
   emailInput.type = "email";
-  emailInput.className = "form-control";
+  emailInput.classList.add("form-control");
   emailInput.required = true;
 
   const emailValidFeedback = document.createElement("div");
@@ -92,11 +113,11 @@ export function renderLogin() {
   passwordLabel.textContent = "Password";
 
   const passwordInputGroup = document.createElement("div");
-  passwordInputGroup.className = "input-group";
+  passwordInputGroup.classList.add("input-group");
 
   const passwordInput = document.createElement("input");
   passwordInput.type = "password";
-  passwordInput.className = "form-control";
+  passwordInput.classList.add("form-control");
   passwordInput.required = true;
 
   const togglePassword = document.createElement("i");
@@ -184,18 +205,23 @@ export function renderLogin() {
     }
 
     try {
-      const res = await axios(
-        "https://68834b4e21fa24876a9d7e70.mockapi.io/cryptoView"
+      const res = await axios.get(
+        "https://68834b4e21fa24876a9d7e70.mockapi.io/cryptoView/user"
       );
 
-      const matchedUser = res.find(
+      const matchedUser = res.data.find(
         (u) =>
           u.email === emailInput.value && u.password === passwordInput.value
       );
 
       if (matchedUser) {
         alert("Login successful! Welcome, " + matchedUser.email);
-        // window.location.href = "game.html";
+        const container = document
+          .querySelector(".container-login-sinup")
+          .remove();
+        const overlay = document
+          .querySelector(".login-overlay")
+          .remove();
       } else {
         errorDiv.textContent = "Invalid email or password.";
       }

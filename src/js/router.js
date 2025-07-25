@@ -15,11 +15,10 @@ export function setIsHomeView(value) {
 }
 
 const routes = {
-  " ": renderHomeView,
+  "": renderHomeView,
 };
 // "/coin-id": renderDitaleCoin,
 // "/about": renderAbout,
-// "/signup": renderSignup,
 // "/watchList": renderWatchList,
 
 function findMatchingRoute(hash) {
