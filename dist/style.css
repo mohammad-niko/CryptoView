@@ -101,6 +101,12 @@ body {
   gap: 20px;
 }
 
+.google-icon {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}
+
 .signup-form {
   display: flex;
   justify-content: space-around;

@@ -1,4 +1,21 @@
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider, // اضافه کردن GoogleAuthProvider
+  signInWithPopup, // اضافه کردن signInWithPopup
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { renderLogin } from "./login.js";
+import { auth, provider } from "../firebase.js"; // auth و provider رو از فایل firebaseConfig.js ایمپورت میکنیم
+
+const googleIconSvg = `
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="google-icon">
+  <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.65-6.65C34.56 2.37 29.35 0 24 0 14.62 0 6.54 5.38 2.5 13.06l7.85 6.16C12.59 13.97 17.75 9.5 24 9.5z"></path>
+  <path fill="#4285F4" d="M46.7 24.5c0-.82-.07-1.62-.2-2.39H24v9.06h12.55c-.56 2.92-2.37 5.37-5.06 7.02l7.7 6.01c4.54-4.23 7.15-10.45 7.15-17.61z"></path>
+  <path fill="#FBBC04" d="M10.38 29.98c-.5-.85-.77-1.83-.77-2.88s.27-2.03.77-2.88l-7.85-6.16C2.17 17.56 1 20.6 1 24s1.17 6.44 3.03 9.06l7.35-5.74z"></path>
+  <path fill="#34A853" d="M24 47.98c6.43 0 11.95-2.13 15.93-5.8l-7.7-6.01c-2.03 1.34-4.63 2.14-8.23 2.14-6.25 0-11.41-4.47-13.39-10.42l-7.35 5.74C6.54 42.6 14.62 47.98 24 47.98z"></path>
+  <path fill="none" d="M0 0h48v48H0z"></path>
+</svg>
+`;
 
 export function renderSignUp() {
   const containerOfInputs = document.querySelector(".container-of-inputs");
@@ -87,17 +104,45 @@ export function renderSignUp() {
     passwordInvalidFeedback
   );
 
-  // -------- Submit Button --------
+  // -------- Submit Button (Sign up with Email/Password) --------
   const submitDiv = document.createElement("div");
   const submitButton = document.createElement("input");
   submitButton.type = "submit";
   submitButton.className = "btn btn-primary mt-3 w-100";
-  submitButton.value = "Sing up";
+  submitButton.value = "Sign up";
   submitDiv.appendChild(submitButton);
 
   // Append all to form
   form.append(emailDiv, passwordDiv, submitDiv);
   containerOfInputs.appendChild(form);
+
+  // -------- Google Sign Up Button --------
+  const googleSignUpDiv = document.createElement("div");
+  googleSignUpDiv.classList.add("text-center", "mt-3");
+
+  const googleSignUpButton = document.createElement("button");
+  googleSignUpButton.type = "button";
+  googleSignUpButton.classList.add(
+    "btn",
+    "btn-outline-primary",
+    "w-100",
+    "d-flex",
+    "align-items-center",
+    "justify-content-center"
+  );
+
+  const googleIconContainer = document.createElement("div");
+  googleIconContainer.innerHTML = googleIconSvg;
+  googleIconContainer.classList.add("me-2");
+
+  const buttonText = document.createElement("span");
+  buttonText.textContent = "Continue with Google";
+
+  googleSignUpButton.appendChild(googleIconContainer);
+  googleSignUpButton.appendChild(buttonText);
+
+  googleSignUpDiv.appendChild(googleSignUpButton);
+  containerOfInputs.appendChild(googleSignUpDiv);
 
   emailInput.addEventListener("input", () => {
     const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
@@ -128,7 +173,7 @@ export function renderSignUp() {
     togglePassword.classList.toggle("bi-eye-slash");
   });
 
-  // Form Submit
+  // Form Submit (Email/Password Sign up)
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     errorDiv.textContent = "";
@@ -142,30 +187,45 @@ export function renderSignUp() {
       form.classList.add("was-validated");
       return;
     }
-    const data = {
-      "email": emailInput.value,
-      "password": passwordInput.value,
-    };
 
     try {
-      const res = await axios.post(
-        "https://68834b4e21fa24876a9d7e70.mockapi.io/cryptoView/user",
-        data
+      const userCredential = await createUserWithEmailAndPassword(
+        auth, // از auth که ایمپورت شده استفاده میکنیم
+        emailInput.value,
+        passwordInput.value
       );
 
-      if (res.status === 201 || res.status === 200) {
-        alert("Signup successful! Welcome, " + emailInput.value);
-
-        
-        setTimeout(() => {
-          containerOfInputs.innerHTML = "";
-          renderLogin();
-        }, 1000); 
-      } else {  
-        errorDiv.textContent = "Signup failed. Please try again.";
-      }
+      alert("Signup successful! Welcome, " + userCredential.user.email);
+      setTimeout(() => {
+        containerOfInputs.innerHTML = "";
+        renderLogin(); // بعد از ثبت‌نام موفق، به صفحه لاگین منتقل میکنیم
+      }, 1000);
     } catch (err) {
-      console.log(err);
+      errorDiv.textContent = err.message;
+      console.error(err);
+    }
+  });
+
+  // Google Sign Up Event Listener
+  googleSignUpButton.addEventListener("click", async () => {
+    errorDiv.textContent = "";
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      alert(
+        "Sign up successful with Google! Welcome, " +
+          (user.displayName || user.email)
+      );
+
+      const container = document.querySelector(".container-login-sinup");
+      if (container) container.remove();
+      const overlay = document.querySelector(".login-overlay");
+      if (overlay) overlay.remove();
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      errorDiv.textContent = errorMessage;
+      console.error("Google Sign Up Error:", errorCode, errorMessage);
     }
   });
 }
