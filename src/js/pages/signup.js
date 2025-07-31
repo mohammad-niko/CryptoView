@@ -1,11 +1,10 @@
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  GoogleAuthProvider, // اضافه کردن GoogleAuthProvider
-  signInWithPopup, // اضافه کردن signInWithPopup
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { renderLogin } from "./login.js";
-import { auth, provider } from "../firebase.js"; // auth و provider رو از فایل firebaseConfig.js ایمپورت میکنیم
+import {
+  auth,
+  provider,
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+} from "../firebase.js";
 
 const googleIconSvg = `
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="google-icon">
@@ -114,6 +113,8 @@ export function renderSignUp() {
 
   // Append all to form
   form.append(emailDiv, passwordDiv, submitDiv);
+  // "OR" separator
+  createOrSeparator(form);
   containerOfInputs.appendChild(form);
 
   // -------- Google Sign Up Button --------
@@ -190,7 +191,7 @@ export function renderSignUp() {
 
     try {
       const userCredential = await createUserWithEmailAndPassword(
-        auth, // از auth که ایمپورت شده استفاده میکنیم
+        auth,
         emailInput.value,
         passwordInput.value
       );
@@ -198,10 +199,10 @@ export function renderSignUp() {
       alert("Signup successful! Welcome, " + userCredential.user.email);
       setTimeout(() => {
         containerOfInputs.innerHTML = "";
-        renderLogin(); // بعد از ثبت‌نام موفق، به صفحه لاگین منتقل میکنیم
+        renderLogin();
       }, 1000);
     } catch (err) {
-      errorDiv.textContent = err.message;
+      errorDiv.textContent = err.code;
       console.error(err);
     }
   });
@@ -228,4 +229,31 @@ export function renderSignUp() {
       console.error("Google Sign Up Error:", errorCode, errorMessage);
     }
   });
+}
+
+export function createOrSeparator(parentElement) {
+  // Create the main container div
+  const separatorContainer = document.createElement("div");
+  separatorContainer.classList.add("or-separator-container");
+
+  // Create the left line div
+  const leftLine = document.createElement("div");
+  leftLine.classList.add("or-separator-line");
+
+  // Create the OR text span
+  const orText = document.createElement("span");
+  orText.classList.add("or-separator-text");
+  orText.textContent = "OR";
+
+  // Create the right line div
+  const rightLine = document.createElement("div");
+  rightLine.classList.add("or-separator-line");
+
+  // Append all elements to the main container
+  separatorContainer.appendChild(leftLine);
+  separatorContainer.appendChild(orText);
+  separatorContainer.appendChild(rightLine);
+
+  // Append the main container to the specified parent element
+  parentElement.appendChild(separatorContainer);
 }

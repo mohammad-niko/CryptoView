@@ -14,7 +14,7 @@
 }
 .container-login-sinup {
   width: 600px;
-  height: 400px;
+  height:550px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -30,6 +30,7 @@
     position: absolute;
     right: 5px;
     color: rgb(148, 147, 147);
+    cursor: pointer;
   }
 
   .log-or-sin {
@@ -61,5 +62,28 @@
 .google-icon {
   width: 24px;
   height: 24px;
-  vertical-align:middle ;
+  vertical-align: middle;
+}
+
+.or-separator-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.or-separator-line {
+  flex-grow: 2;
+  border-top: 1px solid #4a5568;
+  border-radius: 9999px;
+}
+
+.or-separator-text {
+  flex-shrink: 0;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  color: #a0aec0;
+  font-size: 1rem;
+  font-weight: 500;
 }

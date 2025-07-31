@@ -4,7 +4,7 @@ import {
   GoogleAuthProvider, // برای ورود با گوگل
   signInWithPopup, // برای باز کردن پاپ‌آپ ورود گوگل
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { renderSignUp } from "./signup.js";
+import { renderSignUp, createOrSeparator } from "./signup.js";
 import { auth, provider } from "../firebase.js";
 
 const body = document.querySelector("body");
@@ -173,7 +173,8 @@ export function renderLogin() {
   submitDiv.appendChild(submitButton);
 
   // Append all to form
-  form.append(emailDiv, passwordDiv, submitDiv);
+  form.append(emailDiv, passwordDiv, submitDiv,);
+  createOrSeparator(form)
   containerOfInputs.appendChild(form);
 
   // -------- Google Login Button --------
