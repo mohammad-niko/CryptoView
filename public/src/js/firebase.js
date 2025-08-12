@@ -1,9 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
   getAuth,
-  GoogleAuthProvider,
   createUserWithEmailAndPassword,
-  signInWithPopup,
+   signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -17,6 +16,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
 
-export { auth, provider, createUserWithEmailAndPassword, signInWithPopup };
+
+export { auth, provider, createUserWithEmailAndPassword,  signInWithEmailAndPassword };

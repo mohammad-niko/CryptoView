@@ -272,26 +272,5 @@ export function renderLogin() {
     }
   });
 
-  // Google Login Event Listener
-  googleLoginButton.addEventListener("click", async () => {
-    errorDiv.textContent = "";
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      alert(
-        "Login successful with Google! Welcome, " +
-          (user.displayName || user.email)
-      );
 
-      const container = document.querySelector(".container-login-sinup");
-      if (container) container.remove();
-      const overlay = document.querySelector(".login-overlay");
-      if (overlay) overlay.remove();
-    } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      errorDiv.textContent = errorMessage;
-      console.error("Google Login Error:", errorCode, errorMessage);
-    }
-  });
 }
